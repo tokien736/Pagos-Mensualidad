@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="mensualidad.control.EstudiantesControlador">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.EstudiantesControlador">
    <children>
       <Label layoutX="40.0" layoutY="24.0" text="Estudiante">
          <font>
@@ -25,11 +24,12 @@
       <Label layoutX="60.0" layoutY="119.0" text="Gestionar información de los estudiantes" />
       <TableView fx:id="tablaEstudiante" layoutX="51.0" layoutY="144.0" prefHeight="206.0" prefWidth="479.0">
          <columns>
-            <TableColumn fx:id="idColumna" prefWidth="31.0" text="#" />
-            <TableColumn fx:id="nombreCompletoColumna" prefWidth="138.0" text="Nombres y Apellidos" />
-            <TableColumn fx:id="fechaPagoColumna" prefWidth="109.0" text="Fecha de Pago" />
-            <TableColumn fx:id="cuotaColumna" prefWidth="79.0" text="Cuota" />
-            <TableColumn fx:id="totalPagoColumna" prefWidth="109.0" text="Total Pago" />
+            <TableColumn fx:id="idColumna" prefWidth="15.0" text="#" />
+            <TableColumn fx:id="nombreCompletoColumna" prefWidth="134.0" text="Nombres y Apellidos" />
+            <TableColumn fx:id="gradoColumna" prefWidth="65.0" text="Grado" />
+            <TableColumn fx:id="fechaPagoColumna" prefWidth="107.0" text="Fecha de Pago" />
+            <TableColumn fx:id="cuotaColumna" prefWidth="65.0" text="Cuota" />
+            <TableColumn fx:id="totalPagoColumna" prefWidth="92.0" text="Total Pago" />
          </columns>
       </TableView>
       <Label layoutX="363.0" layoutY="119.0" text="Buscar" />

@@ -6,10 +6,12 @@ package mensualidad.control;
 
 import java.io.IOException;
 import java.net.URL;
+import javafx.util.Duration;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mensualidad.modelo.Estudiantes;
 
@@ -28,22 +31,6 @@ import mensualidad.modelo.Estudiantes;
  */
 public class EstudiantesControlador implements Initializable {
 
-private ObservableList<Estudiantes> datoEstudiante = FXCollections.observableArrayList();
-    
-    public EstudiantesControlador(){
-        //Agregando algunos datos de muestra        
-        datoEstudiante.add(new Estudiantes("1","Fernando Garcia"));
-        datoEstudiante.add(new Estudiantes("2","Daniel Stip"));
-        datoEstudiante.add(new Estudiantes("3","Jose Vilca"));
-        datoEstudiante.add(new Estudiantes("4","Jose Enrique"));
-    }
-    /**
-     * Devuelve los datos como una lista observable de Personas.
-     * @return
-     */
-    public ObservableList<Estudiantes> getDatoEstudiantes(){
-        return datoEstudiante;
-    }
     @FXML
     private TableView<Estudiantes> tablaEstudiante;
     @FXML
@@ -56,22 +43,51 @@ private ObservableList<Estudiantes> datoEstudiante = FXCollections.observableArr
     private TableColumn<Estudiantes, String> cuotaColumna;
     @FXML
     private TableColumn<Estudiantes, String> totalPagoColumna;
+    @FXML
+    private TableColumn<Estudiantes, String> gradoColumna;
 
-    /**
-     * Initializes the controller class.
-     */
+    private Estudiantes_Controlador controlador;
+    private ScheduledService<Void> recargaDatosService;   
+
+       /**
+        * Initializes the controller class.
+        */
+    private void cargarDatosEstudiantes() {
+            tablaEstudiante.setItems(controlador.cargarEstudiantes());
+    }
+    
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Inicializar la tabla de estudiantes con las columnas correspondientes
-        idColumna.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        nombreCompletoColumna.setCellValueFactory(cellData -> cellData.getValue().nombreCompletoProperty());
-        cuotaColumna.setCellValueFactory(cellData -> cellData.getValue().cuotaProperty());
-        totalPagoColumna.setCellValueFactory(cellData -> cellData.getValue().totalPagoProperty());
-        fechaPagoColumna.setCellValueFactory(cellData -> cellData.getValue().fechaPagoProperty());
-        // Configurar la lista de estudiantes en la tabla
-        tablaEstudiante.setItems(getDatoEstudiantes());  
-    }    
+        controlador = new Estudiantes_Controlador();
+
+        // Configurar las propiedades de las columnas
+        idColumna.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nombreCompletoColumna.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+        fechaPagoColumna.setCellValueFactory(new PropertyValueFactory<>("fechaPago"));
+        cuotaColumna.setCellValueFactory(new PropertyValueFactory<>("cuota"));
+        totalPagoColumna.setCellValueFactory(new PropertyValueFactory<>("totalPago"));
+        gradoColumna.setCellValueFactory(new PropertyValueFactory<>("gradoEstudios"));
+
+        // Obtener los datos de los estudiantes desde el controlador
+        ObservableList<Estudiantes> estudiantes = controlador.cargarEstudiantes();
+        tablaEstudiante.setItems(estudiantes);
+        
+        // Crear el ScheduledService para recargar los datos cada cierto tiempo
+        recargaDatosService = new ScheduledService<Void>() {
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        cargarDatosEstudiantes();
+                        return null;
+                    }
+                };
+            }
+        };
+        recargaDatosService.setPeriod(Duration.seconds(10)); // Configurar el intervalo de tiempo en segundos
+        recargaDatosService.start();        
+    }
 
     @FXML
     public void agregarestudiante(ActionEvent event) {
