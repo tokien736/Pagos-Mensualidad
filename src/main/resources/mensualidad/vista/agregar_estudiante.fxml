@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="551.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px 2px 2px 2px;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.agregarEstudianteControl">
+   <children>
+      <Text layoutX="140.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agregar Estudiante">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Text>
+      <Text layoutX="62.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="62.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="62.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField layoutX="149.0" layoutY="117.0" prefHeight="25.0" prefWidth="280.0" />
+      <TextField layoutX="149.0" layoutY="172.0" prefHeight="25.0" prefWidth="280.0" />
+      <TextField layoutX="149.0" layoutY="235.0" prefHeight="25.0" prefWidth="280.0" />
+      <HBox layoutX="187.0" layoutY="304.0" spacing="50.0">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: #19C75E;" text="Agregar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: #F32C2C;" text="Cancelar">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
