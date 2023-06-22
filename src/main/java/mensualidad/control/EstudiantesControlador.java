@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
@@ -22,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import mensualidad.control.reporte.Reporte;
 import mensualidad.modelo.Estudiantes;
 
 /**
@@ -56,7 +58,6 @@ public class EstudiantesControlador implements Initializable {
             tablaEstudiante.setItems(controlador.cargarEstudiantes());
     }
     
-    @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controlador = new Estudiantes_Controlador();
@@ -108,6 +109,12 @@ public class EstudiantesControlador implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void btnReporte(ActionEvent event) {
+        Reporte reporte = new Reporte("Cherry");
+        reporte.generarReporte();
     }
     
 }

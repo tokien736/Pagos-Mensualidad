@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.EstudiantesControlador">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.EstudiantesControlador">
    <children>
       <Label layoutX="40.0" layoutY="24.0" text="Estudiante">
          <font>
@@ -34,5 +34,6 @@
       </TableView>
       <Label layoutX="363.0" layoutY="119.0" text="Buscar" />
       <TextField layoutX="406.0" layoutY="115.0" prefHeight="25.0" prefWidth="94.0" />
+      <Button layoutX="337.0" layoutY="32.0" mnemonicParsing="false" onAction="#btnReporte" text="Reporte" />
    </children>
 </AnchorPane>
