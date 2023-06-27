@@ -8,45 +8,44 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: F5C0AD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="162.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado escolar:" />
+      <Text layoutX="20.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado escolar:" />
       <Text layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudiante:" />
-      <Text layoutX="33.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado escolar:" />
-      <TextField layoutX="84.0" layoutY="36.0" prefHeight="26.0" prefWidth="58.0" />
-      <TextField layoutX="255.0" layoutY="36.0" prefHeight="26.0" prefWidth="76.0" />
-      <TextField layoutX="134.0" layoutY="208.0" />
-      <Text layoutX="71.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Busqueda de deuda: ">
+      <Text layoutX="20.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado escolar:" />
+      <TextField layoutX="141.0" layoutY="35.0" prefHeight="26.0" prefWidth="171.0" />
+      <TextField layoutX="141.0" layoutY="70.0" prefHeight="26.0" prefWidth="171.0" />
+      <TextField layoutX="141.0" layoutY="270.0" />
+      <Text layoutX="34.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Busqueda de deuda: ">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="71.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Busqueda de estudiantes: ">
+      <Text layoutX="33.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Busqueda de estudiantes: ">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView layoutX="-3.0" layoutY="72.0" prefHeight="103.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView layoutY="119.0" prefHeight="116.0" prefWidth="550.0" style="-fx-background-color: CBCBF3;" AnchorPane.bottomAnchor="178.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
-          <TableColumn prefWidth="93.60000306367874" text="Codigo estudiante" />
-          <TableColumn prefWidth="78.39996337890625" text="Estudiante" />
-            <TableColumn prefWidth="100.79994201660156" text="Grado escolar" />
-            <TableColumn prefWidth="94.4000244140625" text="Fecha Vencimiento" />
-            <TableColumn prefWidth="102.39996337890625" text="Deuda " />
-            <TableColumn prefWidth="79.20001220703125" text="Accion" />
+          <TableColumn prefWidth="44.0" text="ID" />
+          <TableColumn prefWidth="110.0" text="Estudiante" />
+            <TableColumn prefWidth="146.0" text="Grado escolar" />
+            <TableColumn prefWidth="168.0" text="Fecha Vencimiento" />
+            <TableColumn prefWidth="81.0" text="Deuda " />
         </columns>
       </TableView>
-      <TableView layoutX="-3.0" layoutY="256.0" prefHeight="103.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView layoutY="297.0" prefHeight="103.0" prefWidth="200.0" style="-fx-background-color: CBCBF3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <columns>
-            <TableColumn prefWidth="100.80001527070999" text="Indice " />
-            <TableColumn prefWidth="138.39996337890625" text="Codigo" />
+            <TableColumn prefWidth="37.0" text="ID" />
+            <TableColumn prefWidth="203.0" text="Codigo" />
             <TableColumn prefWidth="158.3999786376953" text="Estudiante" />
             <TableColumn prefWidth="151.2000732421875" text="Grado escolar" />
          </columns>
       </TableView>
-      <Button layoutX="369.0" layoutY="208.0" mnemonicParsing="false" text="Busqueda" />
-      <Button layoutX="450.0" layoutY="208.0" mnemonicParsing="false" text="Reporte" />
-      <Button layoutX="369.0" layoutY="36.0" mnemonicParsing="false" text="Busqueda" />
-      <Button layoutX="450.0" layoutY="36.0" mnemonicParsing="false" text="Reporte" />
+      <Button layoutX="380.0" layoutY="270.0" mnemonicParsing="false" style="-fx-background-color: #0BA1EC;" text="Busqueda" />
+      <Button layoutX="471.0" layoutY="270.0" mnemonicParsing="false" style="-fx-background-color: #E33D4C;" text="Reporte" />
+      <Button layoutX="380.0" layoutY="71.0" mnemonicParsing="false" style="-fx-background-color: #0BA1EC;" text="Busqueda" textFill="#050505" />
+      <Button layoutX="471.0" layoutY="71.0" mnemonicParsing="false" style="-fx-background-color: #E33D4C;" text="Reporte" textAlignment="CENTER" />
    </children>
 </AnchorPane>
