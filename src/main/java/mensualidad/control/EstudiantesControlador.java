@@ -77,7 +77,7 @@ public class EstudiantesControlador implements Initializable {
         gradoColumna.setCellValueFactory(new PropertyValueFactory<>("gradoEstudios"));
         
         // Configurar las propiedades de las columnas de matricula
-        idColumna2.setCellValueFactory(new PropertyValueFactory<>("matriculaId"));
+        idColumna2.setCellValueFactory(new PropertyValueFactory<>("matriculaID"));
         idEstudianteColumna.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getEstudiante().getEstudiantesId()).asObject());
         fechaPagoColumna.setCellValueFactory(new PropertyValueFactory<>("fechaPago"));
         pensionColumna.setCellValueFactory(new PropertyValueFactory<>("pension"));  
