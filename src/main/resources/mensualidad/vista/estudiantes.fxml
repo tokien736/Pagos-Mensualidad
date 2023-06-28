@@ -11,14 +11,11 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: C9CBCD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.EstudiantesControlador">
    <children>
       <Line endX="380.0" layoutX="166.0" layoutY="61.0" startX="-151.0" />
-      <TableView fx:id="tablaEstudiante" layoutX="14.0" layoutY="131.0" prefHeight="269.0" prefWidth="550.0" style="-fx-background-color: #B5D0F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="131.0">
+      <TableView fx:id="tablaEstudiante" layoutX="8.0" layoutY="131.0" prefHeight="269.0" prefWidth="189.0" style="-fx-background-color: #B5D0F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="131.0">
          <columns>
-            <TableColumn fx:id="idColumna" prefWidth="33.0" text="ID " />
-            <TableColumn fx:id="nombreCompletoColumna" prefWidth="103.0" text="Estudiante" />
-            <TableColumn fx:id="gradoColumna" prefWidth="121.0" text="Grado" />
-            <TableColumn fx:id="fechaPagoColumna" prefWidth="119.0" text="Fecha de Pago" />
-            <TableColumn fx:id="cuotaColumna" prefWidth="85.0" text="Cuota" />
-            <TableColumn fx:id="totalPagoColumna" prefWidth="88.0" text="Total Pago" />
+            <TableColumn fx:id="idColumna" prefWidth="44.0" text="ID " />
+            <TableColumn fx:id="nombreCompletoColumna" prefWidth="91.0" text="Estudiante" />
+            <TableColumn fx:id="gradoColumna" prefWidth="61.0" text="Grado" />
          </columns>
       </TableView>
       <Button layoutX="15.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnReporte" prefHeight="24.0" prefWidth="144.0" style="-fx-background-color: F13030;" text="Reporte" />
@@ -28,6 +25,16 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="236.0" layoutY="84.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="144.0" style="-fx-background-color: #32C215;" text="Editar" />
+      <Button layoutX="236.0" layoutY="84.0" mnemonicParsing="false" onAction="#agregarMatricula" prefHeight="24.0" prefWidth="144.0" style="-fx-background-color: #32C215;" text="Matricular" />
+      <TableView fx:id="tablaMatricula" layoutX="218.0" layoutY="131.0" prefHeight="269.0" prefWidth="344.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="idColumna2" prefWidth="30.0" text="ID" />
+          <TableColumn fx:id="idEstudianteColumna" prefWidth="72.0" text="IDEstudiante" />
+            <TableColumn fx:id="pensionColumna" prefWidth="52.0" text="Cuota" />
+            <TableColumn fx:id="mesesColumna" prefWidth="68.0" text="Meses" />
+            <TableColumn fx:id="fechaPagoColumna" prefWidth="69.0" text="Fecha" />
+            <TableColumn fx:id="estadoColumna" prefWidth="58.0" text="Estado" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

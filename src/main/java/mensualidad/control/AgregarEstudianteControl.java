@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import mensualidad.control.JPA.Estudiantes_Controlador;
 import mensualidad.modelo.Estudiantes;
 
 /**
@@ -41,15 +42,13 @@ public class AgregarEstudianteControl implements Initializable {
         Estudiantes_Controlador controlador = new Estudiantes_Controlador();
 
         Estudiantes estudiante = new Estudiantes(nombreCompleto, grado);
-        estudiante.setCuota("700");
-        estudiante.setTotalPago("2500");
-        estudiante.setFechaPago(LocalDate.of(2022, 1, 22));
         estudiante.setGradoEstudios(grado);
         controlador.insertarEstudiante(estudiante);
 
         System.out.println("Estudiante insertado correctamente.");
         
     }
+        
     /**
      * Initializes the controller class.
      */

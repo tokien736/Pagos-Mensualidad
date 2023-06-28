@@ -1,4 +1,4 @@
-package mensualidad.control;
+package mensualidad.control.JPA;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,12 +13,12 @@ import mensualidad.modelo.Estudiantes;
 
 public class Estudiantes_Controlador {
     private ObservableList<Estudiantes> datoEstudiante = FXCollections.observableArrayList();
+    private EntityManagerFactory emf;
+    
     public ObservableList<Estudiantes> getDatoEstudiantes() {
         return datoEstudiante;
     }
-
-    private EntityManagerFactory emf;
-
+  
     public Estudiantes_Controlador() {
         this.emf = Persistence.createEntityManagerFactory("BaseDatos");
     }
@@ -61,8 +61,5 @@ public class Estudiantes_Controlador {
         } finally {
             em.close();
         }
-    }
-
-    
-
+    } 
 }

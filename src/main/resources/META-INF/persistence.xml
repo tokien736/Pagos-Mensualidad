@@ -3,6 +3,7 @@
   <persistence-unit name="BaseDatos" transaction-type="RESOURCE_LOCAL">
     <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
     <class>mensualidad.modelo.Estudiantes</class>
+    <class>mensualidad.modelo.Matricula</class>
     <properties>
       <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
       <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>

@@ -8,14 +8,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: DCDDDF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: DCDDDF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.ReportesController">
    <children>
       <Text layoutX="20.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado escolar:" />
       <Text layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudiante:" />
       <Text layoutX="20.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado escolar:" />
-      <TextField layoutX="141.0" layoutY="35.0" prefHeight="26.0" prefWidth="171.0" />
-      <TextField layoutX="141.0" layoutY="70.0" prefHeight="26.0" prefWidth="171.0" />
-      <TextField layoutX="141.0" layoutY="270.0" />
+      <TextField fx:id="txtfieldEstudiante" layoutX="141.0" layoutY="35.0" prefHeight="26.0" prefWidth="171.0" />
+      <TextField fx:id="txtfieldGrado" layoutX="141.0" layoutY="70.0" prefHeight="26.0" prefWidth="171.0" />
+      <TextField fx:id="txtfieldGrado2" layoutX="141.0" layoutY="270.0" />
       <Text layoutX="34.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Busqueda de deuda: ">
          <font>
             <Font size="24.0" />
@@ -26,26 +26,25 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView layoutY="119.0" prefHeight="116.0" prefWidth="550.0" style="-fx-background-color: A3BFF7;" AnchorPane.bottomAnchor="178.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView fx:id="tablaResultados" layoutY="119.0" prefHeight="116.0" prefWidth="550.0" style="-fx-background-color: A3BFF7;" AnchorPane.bottomAnchor="178.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
-          <TableColumn prefWidth="44.0" text="ID" />
-          <TableColumn prefWidth="110.0" text="Estudiante" />
-            <TableColumn prefWidth="146.0" text="Grado escolar" />
-            <TableColumn prefWidth="168.0" text="Fecha Vencimiento" />
-            <TableColumn prefWidth="81.0" text="Deuda " />
+          <TableColumn fx:id="idColumna" prefWidth="44.0" text="ID" />
+          <TableColumn fx:id="nombreCompletoColumna" prefWidth="110.0" text="Estudiante" />
+            <TableColumn fx:id="gradoColumna" prefWidth="146.0" text="Grado escolar" />
+            <TableColumn fx:id="fechaPagoColumna" prefWidth="168.0" text="Fecha Vencimiento" />
+            <TableColumn fx:id="totalPagoColumna" prefWidth="81.0" text="Deuda " />
         </columns>
       </TableView>
-      <TableView layoutY="297.0" prefHeight="103.0" prefWidth="200.0" style="-fx-background-color: A3BFF7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView fx:id="tablaResultados2" layoutY="297.0" prefHeight="103.0" prefWidth="200.0" style="-fx-background-color: A3BFF7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <columns>
-            <TableColumn prefWidth="37.0" text="ID" />
-            <TableColumn prefWidth="203.0" text="Codigo" />
-            <TableColumn prefWidth="158.3999786376953" text="Estudiante" />
-            <TableColumn prefWidth="151.2000732421875" text="Grado escolar" />
+            <TableColumn fx:id="idColumna2" prefWidth="109.0" text="ID" />
+            <TableColumn fx:id="nombreCompletoColumna2" prefWidth="219.0" text="Estudiante" />
+            <TableColumn fx:id="gradoColumna2" prefWidth="221.0" text="Grado escolar" />
          </columns>
       </TableView>
-      <Button layoutX="380.0" layoutY="270.0" mnemonicParsing="false" style="-fx-background-color: #0BA1EC;" text="Busqueda" />
+      <Button layoutX="380.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleBuscar2ButtonAction" style="-fx-background-color: #0BA1EC;" text="Busqueda" />
       <Button layoutX="471.0" layoutY="270.0" mnemonicParsing="false" style="-fx-background-color: #E33D4C;" text="Reporte" />
-      <Button layoutX="380.0" layoutY="71.0" mnemonicParsing="false" style="-fx-background-color: #0BA1EC;" text="Busqueda" textFill="#050505" />
+      <Button layoutX="380.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleBuscarButtonAction" style="-fx-background-color: #0BA1EC;" text="Busqueda" textFill="#050505" />
       <Button layoutX="471.0" layoutY="71.0" mnemonicParsing="false" style="-fx-background-color: #E33D4C;" text="Reporte" textAlignment="CENTER" />
    </children>
 </AnchorPane>

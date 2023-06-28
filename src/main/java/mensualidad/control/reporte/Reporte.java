@@ -29,7 +29,7 @@ public class Reporte {
             Connection conn = entityManager.unwrap(Connection.class);
             
             // Código para generar el informe utilizando JasperReports
-            String rutaJRXML = "D:/Java/Pagos-Mensualidad/src/main/java/mensualidad/control/reporte/Cherry.jrxml";
+            String rutaJRXML = "src//main//resources//mensualidad//reportes//Cof.jrxml";
             File archivoJRXML = new File(rutaJRXML);
             InputStream dir = new FileInputStream(archivoJRXML);
             JasperReport jr = JasperCompileManager.compileReport(dir);
