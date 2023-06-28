@@ -23,7 +23,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Estudiantes.seleccionaTodos", query = "SELECT e FROM Estudiantes e"),
     @NamedQuery(name = "Estudiantes.seleccionaPorId", query = "SELECT e FROM Estudiantes e WHERE e.estudiantesId = :EstudiantesId")})
-public class Estudiantes implements Serializable {
+public class Estudiantes implements Serializable  {
 
     private static final long serialVersionUID = 1L;
     
