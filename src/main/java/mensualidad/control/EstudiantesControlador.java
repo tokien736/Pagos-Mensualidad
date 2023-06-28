@@ -59,13 +59,14 @@ public class EstudiantesControlador implements Initializable {
     private MatriculaControladorJPA controlador1;
     private ScheduledService<Void> recargaDatosService;   
 
-       /**
-        * Initializes the controller class.
-        */
+    /**
+     * Initializes the controller class.
+     */
     private void cargarDatosEstudiantes() {
-            tablaEstudiante.setItems(controlador.cargarEstudiantes());
+        tablaEstudiante.setItems(controlador.cargarEstudiantes());
+        tablaMatricula.setItems(controlador1.cargarMatriculas());
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controlador = new Estudiantes_Controlador();
@@ -152,5 +153,6 @@ public class EstudiantesControlador implements Initializable {
         Reporte reporte = new Reporte("Cherry");
         reporte.generarReporte();
     }
-    
+
 }
+

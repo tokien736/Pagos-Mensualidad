@@ -1,14 +1,11 @@
 package mensualidad.modelo;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import javafx.beans.property.IntegerProperty;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Basic;
@@ -23,7 +20,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Estudiantes.seleccionaTodos", query = "SELECT e FROM Estudiantes e"),
     @NamedQuery(name = "Estudiantes.seleccionaPorId", query = "SELECT e FROM Estudiantes e WHERE e.estudiantesId = :EstudiantesId")})
-public class Estudiantes implements Serializable {
+public class Estudiantes implements Serializable  {
 
     private static final long serialVersionUID = 1L;
 

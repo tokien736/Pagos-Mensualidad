@@ -25,13 +25,13 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField layoutX="303.0" layoutY="161.0" />
+      <TextField fx:id="usuario" layoutX="303.0" layoutY="161.0" />
       <HBox layoutX="229.0" layoutY="285.0" spacing="50.0">
          <children>
             <Button mnemonicParsing="false" onAction="#ingresar" style="-fx-background-color: #19C75E;" text="Ingresar" />
             <Button mnemonicParsing="false" onAction="#salir" style="-fx-background-color: #F32C12;" text="Salir" />
          </children>
       </HBox>
-      <PasswordField layoutX="303.0" layoutY="210.0" />
+      <PasswordField fx:id="password" layoutX="303.0" layoutY="210.0" />
    </children>
 </AnchorPane>

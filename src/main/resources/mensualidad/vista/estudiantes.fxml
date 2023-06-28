@@ -11,11 +11,20 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: C9CBCD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.EstudiantesControlador">
    <children>
       <Line endX="380.0" layoutX="166.0" layoutY="61.0" startX="-151.0" />
-      <TableView fx:id="tablaEstudiante" layoutX="8.0" layoutY="131.0" prefHeight="269.0" prefWidth="189.0" style="-fx-background-color: #B5D0F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="131.0">
+      <TableView fx:id="tablaMatricula" layoutX="236.0" layoutY="131.0" prefHeight="269.0" prefWidth="315.0" style="-fx-background-color: #B5D0F3;">
          <columns>
-            <TableColumn fx:id="idColumna" prefWidth="44.0" text="ID " />
-            <TableColumn fx:id="nombreCompletoColumna" prefWidth="91.0" text="Estudiante" />
-            <TableColumn fx:id="gradoColumna" prefWidth="61.0" text="Grado" />
+            <TableColumn fx:id="idMatricula" prefWidth="33.0" text="ID " />
+            <TableColumn fx:id="pagadoColumna" prefWidth="71.0" text="Pagado" />
+            <TableColumn fx:id="cuotaColumna" prefWidth="78.0" text="cuota" />
+            <TableColumn fx:id="mesesColumna" prefWidth="66.0" text="meses" />
+            <TableColumn fx:id="fechaColumna" prefWidth="66.0" text="fecha" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tablaEstudiante" layoutX="14.0" layoutY="131.0" prefHeight="269.0" prefWidth="220.0" style="-fx-background-color: #B5D0F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="131.0">
+         <columns>
+            <TableColumn fx:id="idColumna" prefWidth="33.0" text="ID " />
+            <TableColumn fx:id="nombreCompletoColumna" prefWidth="103.0" text="Estudiante" />
+            <TableColumn fx:id="gradoColumna" prefWidth="83.0" text="Grado" />
          </columns>
       </TableView>
       <Button layoutX="15.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnReporte" prefHeight="24.0" prefWidth="144.0" style="-fx-background-color: F13030;" text="Reporte" />

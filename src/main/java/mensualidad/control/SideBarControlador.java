@@ -72,9 +72,28 @@ public class SideBarControlador implements Initializable{
 
     @FXML
     private void cerrarSesion(MouseEvent event) {
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        primaryStage.close();
+    try {
+        // Cargar el archivo FXML de la ventana de inicio de sesión
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mensualidad/vista/login.fxml"));
+        Parent root = loader.load();
+
+        // Crear una nueva escena
+        Scene scene = new Scene(root);
+
+        // Obtener la ventana actual
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Crear una nueva ventana
+        Stage loginStage = new Stage();
+        loginStage.setScene(scene);
+        // Mostrar la nueva ventana y cerrar la actual
+        loginStage.show();
+        currentStage.close();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
     
     private void cargarPaginas(String page){
         Parent root = null;

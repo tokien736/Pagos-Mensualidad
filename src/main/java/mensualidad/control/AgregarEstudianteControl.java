@@ -16,12 +16,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mensualidad.control.JPA.Estudiantes_Controlador;
 import mensualidad.modelo.Estudiantes;
+import mensualidad.modelo.Matricula;
 
 /**
  * FXML Controller class
  *
  * @author USUARIO
  */
+
 public class AgregarEstudianteControl implements Initializable {
 
 
@@ -41,9 +43,14 @@ public class AgregarEstudianteControl implements Initializable {
 
         Estudiantes_Controlador controlador = new Estudiantes_Controlador();
 
+        
         Estudiantes estudiante = new Estudiantes(nombreCompleto, grado);
         estudiante.setGradoEstudios(grado);
         controlador.insertarEstudiante(estudiante);
+        
+  
+        
+        
 
         System.out.println("Estudiante insertado correctamente.");
         
@@ -70,3 +77,4 @@ public class AgregarEstudianteControl implements Initializable {
 
     
 }
+

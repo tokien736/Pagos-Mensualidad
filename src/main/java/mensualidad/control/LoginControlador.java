@@ -14,7 +14,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import mensualidad.modelo.Usuarios;
 
 /**
  * FXML Controller class
@@ -23,43 +33,78 @@ import javafx.stage.Stage;
  */
 public class LoginControlador implements Initializable {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+    @FXML
+    private TextField usuario;
+    @FXML
+    private PasswordField password;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO     
     }    
 
     @FXML
     public void ingresar(ActionEvent event) {
+        String nombreUsuario = usuario.getText();
+        String contrasenaUsuario = password.getText();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BaseDatos");
+        EntityManager em = emf.createEntityManager();
+
         try {
-            // Cargar el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mensualidad/vista/SideBar.fxml"));
-            Parent root = loader.load();
+            // Consultar el usuario por nombre de usuario
+            TypedQuery<Usuarios> query = em.createQuery("SELECT u FROM Usuarios u WHERE u.nombreUsuario = :nombreUsuario", Usuarios.class);
+            query.setParameter("nombreUsuario", nombreUsuario);
+            Usuarios usuario = query.getSingleResult();
 
-            // Crear una nueva escena
-            Scene scene = new Scene(root);
+            // Verificar la contraseña
+            if (usuario != null && usuario.getContrasena().equals(contrasenaUsuario)) {
+                UsuarioAutenticado.getInstance().setUsuario(usuario);
+                
 
-            // Obtener la ventana actual
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                // Cargar el archivo FXML
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/mensualidad/vista/SideBar.fxml"));
+                Parent root = loader.load();
 
-            // Crear una nueva ventana
-            Stage newStage = new Stage();
-            newStage.setScene(scene);
+                // Crear una nueva escena
+                Scene scene = new Scene(root);
 
-            // Mostrar la nueva ventana y cerrar la actual si es necesario
-            newStage.show();
-            currentStage.close();
-        } catch (IOException e) {
+                // Obtener la ventana actual
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                // Crear una nueva ventana
+                Stage newStage = new Stage();
+                newStage.setScene(scene);
+                // Mostrar la nueva ventana y cerrar la actual si es necesario
+                newStage.show();
+                currentStage.close();
+            } else {
+                // Mostrar un mensaje de alerta si la contraseña es incorrecta
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error de autenticación");
+                alert.setHeaderText(null);
+                alert.setContentText("El nombre de usuario o la contraseña son incorrectos");
+                alert.showAndWait();
+                
+            }
+            
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
         }
     }
+
 
     @FXML
     public void salir(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.close();
     }
-    
+     
 }
