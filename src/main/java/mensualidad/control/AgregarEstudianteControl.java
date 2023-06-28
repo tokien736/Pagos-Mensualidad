@@ -15,12 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mensualidad.modelo.Estudiantes;
+import mensualidad.modelo.Matricula;
 
 /**
  * FXML Controller class
  *
  * @author USUARIO
  */
+
 public class AgregarEstudianteControl implements Initializable {
 
 
@@ -39,13 +41,23 @@ public class AgregarEstudianteControl implements Initializable {
         String grado = gradoField.getText();
 
         Estudiantes_Controlador controlador = new Estudiantes_Controlador();
-
+        Matricula_Controlador controladorMatricula = new Matricula_Controlador();
+        
         Estudiantes estudiante = new Estudiantes(nombreCompleto, grado);
-        estudiante.setCuota("700");
-        estudiante.setTotalPago("2500");
-        estudiante.setFechaPago(LocalDate.of(2022, 1, 22));
         estudiante.setGradoEstudios(grado);
         controlador.insertarEstudiante(estudiante);
+        
+        // Valores fijos de la matrícula
+
+        String cuota = "700";
+        Integer meses = 2;
+        Boolean pagado = false;
+        LocalDate fechaPago = LocalDate.of(2022, 1, 22);
+       
+        Matricula matricula = new Matricula(estudiante,cuota,meses,pagado,fechaPago);
+        controladorMatricula.insertarMatricula(matricula);
+        
+        
 
         System.out.println("Estudiante insertado correctamente.");
         
@@ -68,6 +80,5 @@ public class AgregarEstudianteControl implements Initializable {
     private void btAgregar(ActionEvent event) {
         nuevoEstudainte();
     }
-
-    
 }
+
