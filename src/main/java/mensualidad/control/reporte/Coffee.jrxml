@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Coffee" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM Matricula]]>
+	</queryString>
+	<field name="matriculaid" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="matriculaid"/>
+		<property name="com.jaspersoft.studio.field.label" value="matriculaid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+	</field>
+	<field name="fechaPago" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fechaPago"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaPago"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+	</field>
+	<field name="mesesDeuda" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="mesesDeuda"/>
+		<property name="com.jaspersoft.studio.field.label" value="mesesDeuda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+	</field>
+	<field name="estado" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+	</field>
+	<field name="pension" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="pension"/>
+		<property name="com.jaspersoft.studio.field.label" value="pension"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+	</field>
+	<field name="estudianteId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="estudianteId"/>
+		<property name="com.jaspersoft.studio.field.label" value="estudianteId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{matriculaid}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement mode="Opaque" x="-30" y="6" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF" uuid="df26104b-a7fc-458f-8a21-50b13c7c7736"/>
+					<rectangle>
+						<reportElement mode="Opaque" x="2" y="0" width="36" height="24" backcolor="#736343" uuid="369745f3-8095-4b8b-8b7a-38e42b7aef67"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<staticText>
+						<reportElement x="50" y="0" width="80" height="30" uuid="7a28214d-c693-4efa-8ca6-c76893a8a04c"/>
+						<textElement>
+							<font fontName="Times New Roman" size="16"/>
+						</textElement>
+						<text><![CDATA[MatriculaID]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="140" y="0" width="100" height="30" uuid="a862f272-8080-4cfd-87c6-c48808f0eeb4"/>
+						<textElement>
+							<font fontName="Times New Roman" size="16"/>
+						</textElement>
+						<text><![CDATA[Fecha Pago]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="250" y="1" width="50" height="30" uuid="5c060474-705a-4974-a36d-f0112819d635"/>
+						<textElement>
+							<font fontName="Times New Roman" size="16"/>
+						</textElement>
+						<text><![CDATA[Meses]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="306" y="0" width="50" height="30" uuid="9548e089-2311-4f61-9d48-d0371d55930b"/>
+						<textElement>
+							<font fontName="Times New Roman" size="16"/>
+						</textElement>
+						<text><![CDATA[Estado]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="400" y="1" width="60" height="30" uuid="1e96dfd7-b925-419f-8f13-9886f8ecb358"/>
+						<textElement>
+							<font fontName="Times New Roman" size="16"/>
+						</textElement>
+						<text><![CDATA[Pension]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="498" y="1" width="94" height="30" uuid="b450e657-798d-46d8-8bd1-0730becd6d59"/>
+						<textElement>
+							<font fontName="Times New Roman" size="16"/>
+						</textElement>
+						<text><![CDATA[EstdudianteID]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{fechaPago}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement style="SubTitle" x="36" y="5" width="44" height="20" uuid="a1225b1f-5af9-4289-9f7a-1ad488bea9f4"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matriculaid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="100" y="5" width="120" height="20" uuid="0862a8ef-74e4-42f0-82a6-555296ee986e"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="220" y="5" width="30" height="20" uuid="6d288d49-ac6e-4a92-b645-30f41df19f5e"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mesesDeuda}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="270" y="5" width="90" height="20" uuid="d5af6c63-3f2d-43a1-a27e-8054df31df8b"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="370" y="5" width="90" height="20" uuid="19479308-b625-43c6-b212-7c005c3b8dbd"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pension}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="470" y="5" width="90" height="20" uuid="72817c24-dc91-4644-a909-71b2bf887dd5"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{estudianteId}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="mesesDeuda">
+		<groupExpression><![CDATA[$F{mesesDeuda}]]></groupExpression>
+	</group>
+	<group name="estado">
+		<groupExpression><![CDATA[$F{estado}]]></groupExpression>
+	</group>
+	<group name="pension">
+		<groupExpression><![CDATA[$F{pension}]]></groupExpression>
+	</group>
+	<group name="estudianteId">
+		<groupExpression><![CDATA[$F{estudianteId}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="20" y="0" width="480" height="120" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="45"/>
+				</textElement>
+				<text><![CDATA[Reporte Matriculados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="1a61a836-d137-48b1-ad67-6ff64600bf93"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766"/>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="183682bc-d976-4756-83e0-6625a3f98ed1"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343" uuid="0193f9b3-1559-491a-8580-b6988863b6a1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

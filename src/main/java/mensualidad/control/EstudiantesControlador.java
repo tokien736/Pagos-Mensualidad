@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import mensualidad.control.JPA.Estudiantes_Controlador;
 import mensualidad.control.JPA.MatriculaControladorJPA;
 import mensualidad.control.reporte.Reporte;
+import mensualidad.control.reporte.ReporteMatricula;
 import mensualidad.modelo.Estudiantes;
 import mensualidad.modelo.Matricula;
 
@@ -152,6 +153,11 @@ public class EstudiantesControlador implements Initializable {
     private void btnReporte(ActionEvent event) {
         Reporte reporte = new Reporte("Cherry");
         reporte.generarReporte();
+    }
+    @FXML
+    private void btnReporte2(ActionEvent event) {
+        ReporteMatricula reporte1 = new ReporteMatricula("Coffee");
+        reporte1.generarReporte();
     }
 
 }

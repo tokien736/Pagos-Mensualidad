@@ -13,10 +13,10 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 
-public class Reporte {
+public class ReporteMatricula {
     private String reporte;
     
-    public Reporte(String reporte){
+    public ReporteMatricula(String reporte){
         this.reporte = reporte;
     }
     
@@ -29,7 +29,7 @@ public class Reporte {
             Connection conn = entityManager.unwrap(Connection.class);
             
             // Código para generar el informe utilizando JasperReports
-            String rutaJRXML = "src\\main\\java\\mensualidad\\control\\reporte\\Cherry.jrxml";
+            String rutaJRXML = "src\\main\\java\\mensualidad\\control\\reporte\\Coffee.jrxml";
             File archivoJRXML = new File(rutaJRXML);
             InputStream dir = new FileInputStream(archivoJRXML);
             JasperReport jr = JasperCompileManager.compileReport(dir);
