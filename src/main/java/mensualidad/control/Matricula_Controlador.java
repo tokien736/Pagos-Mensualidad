@@ -1,6 +1,4 @@
 package mensualidad.control;
-
-import java.time.LocalDate;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,41 +8,46 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import mensualidad.modelo.Estudiantes;
+import mensualidad.modelo.Matricula;
 
-public class Estudiantes_Controlador {
-    private ObservableList<Estudiantes> datoEstudiante = FXCollections.observableArrayList();
-    public ObservableList<Estudiantes> getDatoEstudiantes() {
-        return datoEstudiante;
+public class Matricula_Controlador {
+    private ObservableList<Matricula> datosMatricula = FXCollections.observableArrayList();
+    public ObservableList<Matricula> getDatosMatricula() {
+        return datosMatricula;
     }
+
     private EntityManagerFactory emf;
-    public Estudiantes_Controlador() {
+
+    public Matricula_Controlador() {
         this.emf = Persistence.createEntityManagerFactory("BaseDatos");
     }
-    public ObservableList<Estudiantes> cargarEstudiantes() {
-        ObservableList<Estudiantes> datoEstudiante = FXCollections.observableArrayList();
+
+    public ObservableList<Matricula> cargarMatriculas() {
+        ObservableList<Matricula> datosMatricula = FXCollections.observableArrayList();
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Estudiantes> query = em.createQuery("SELECT e FROM Estudiantes e", Estudiantes.class);
-            List<Estudiantes> estudiantes = query.getResultList();
+            TypedQuery<Matricula> query = em.createQuery("SELECT m FROM Matricula m", Matricula.class);
+            List<Matricula> matriculas = query.getResultList();
 
-            // Agregar los estudiantes a la lista observable
-            datoEstudiante.addAll(estudiantes);
+            // Agregar las matriculas a la lista observable
+            datosMatricula.addAll(matriculas);
 
-            return datoEstudiante;
+            return datosMatricula;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             em.close();
         }
-        return datoEstudiante;
+        return datosMatricula;
     }
-    public void insertarEstudiante(Estudiantes estudiante) {
+    
+    public void insertarMatricula(Matricula matricula) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = null;
         try {
             tx = em.getTransaction();
             tx.begin();
-            em.persist(estudiante);
+            em.persist(matricula);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
@@ -56,3 +59,4 @@ public class Estudiantes_Controlador {
         }
     }
 }
+

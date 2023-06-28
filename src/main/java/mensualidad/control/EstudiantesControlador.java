@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mensualidad.control.reporte.Reporte;
 import mensualidad.modelo.Estudiantes;
+import mensualidad.modelo.Matricula;
 
 /**
  * FXML Controller class
@@ -40,40 +41,62 @@ public class EstudiantesControlador implements Initializable {
     @FXML
     private TableColumn<Estudiantes, String> nombreCompletoColumna;
     @FXML
-    private TableColumn<Estudiantes, LocalDate> fechaPagoColumna;
-    @FXML
-    private TableColumn<Estudiantes, String> cuotaColumna;
-    @FXML
-    private TableColumn<Estudiantes, String> totalPagoColumna;
-    @FXML
     private TableColumn<Estudiantes, String> gradoColumna;
+    //Matricula Tabla
+    @FXML
+    private TableView<Matricula> tablaMatricula;
+    @FXML
+    private TableColumn<Matricula, String> idMatricula;
+    @FXML
+    private TableColumn<Matricula, String> estudianteIdColumna;
+    @FXML
+    private TableColumn<Matricula, String> cuotaColumna;
+    @FXML
+    private TableColumn<Matricula, Integer> mesesColumna;
+    @FXML
+    private TableColumn<Matricula, String> pagadoColumna;
+    @FXML
+    private TableColumn<Matricula, LocalDate> fechaColumna;
 
     private Estudiantes_Controlador controlador;
-    private ScheduledService<Void> recargaDatosService;   
+    private Matricula_Controlador controlador2;
+    private ScheduledService<Void> recargaDatosService;
 
-       /**
-        * Initializes the controller class.
-        */
+    /**
+     * Initializes the controller class.
+     */
     private void cargarDatosEstudiantes() {
-            tablaEstudiante.setItems(controlador.cargarEstudiantes());
+        tablaEstudiante.setItems(controlador.cargarEstudiantes());
+        tablaMatricula.setItems(controlador2.cargarMatriculas());
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controlador = new Estudiantes_Controlador();
+        controlador2 = new Matricula_Controlador();
 
         // Configurar las propiedades de las columnas
         idColumna.setCellValueFactory(new PropertyValueFactory<>("id"));
         nombreCompletoColumna.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
-        fechaPagoColumna.setCellValueFactory(new PropertyValueFactory<>("fechaPago"));
-        cuotaColumna.setCellValueFactory(new PropertyValueFactory<>("cuota"));
-        totalPagoColumna.setCellValueFactory(new PropertyValueFactory<>("totalPago"));
         gradoColumna.setCellValueFactory(new PropertyValueFactory<>("gradoEstudios"));
+        
+        // Inicializar la columna idMatricula
+        idMatricula.setCellValueFactory(new PropertyValueFactory<>("matriculaId"));
+
+        //Tabla Matricula
+        pagadoColumna.setCellValueFactory(new PropertyValueFactory<>("pagado"));
+        cuotaColumna.setCellValueFactory(new PropertyValueFactory<>("cuota"));
+        mesesColumna.setCellValueFactory(new PropertyValueFactory<>("mesesDeuda"));
+        fechaColumna.setCellValueFactory(new PropertyValueFactory<>("fechaPago"));
 
         // Obtener los datos de los estudiantes desde el controlador
         ObservableList<Estudiantes> estudiantes = controlador.cargarEstudiantes();
         tablaEstudiante.setItems(estudiantes);
         
+        // de la matricula
+        ObservableList<Matricula> matricula = controlador2.cargarMatriculas();
+        tablaMatricula.setItems(matricula);
+
         // Crear el ScheduledService para recargar los datos cada cierto tiempo
         recargaDatosService = new ScheduledService<Void>() {
             protected Task<Void> createTask() {
@@ -87,7 +110,7 @@ public class EstudiantesControlador implements Initializable {
             }
         };
         recargaDatosService.setPeriod(Duration.seconds(10)); // Configurar el intervalo de tiempo en segundos
-        recargaDatosService.start();        
+        recargaDatosService.start();
     }
 
     @FXML
@@ -116,5 +139,6 @@ public class EstudiantesControlador implements Initializable {
         Reporte reporte = new Reporte("Cherry");
         reporte.generarReporte();
     }
-    
+
 }
+
