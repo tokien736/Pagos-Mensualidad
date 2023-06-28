@@ -63,6 +63,9 @@ public class LoginControlador implements Initializable {
 
             // Verificar la contraseña
             if (usuario != null && usuario.getContrasena().equals(contrasenaUsuario)) {
+                UsuarioAutenticado.getInstance().setUsuario(usuario);
+                
+
                 // Cargar el archivo FXML
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/mensualidad/vista/SideBar.fxml"));
                 Parent root = loader.load();
@@ -86,7 +89,9 @@ public class LoginControlador implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("El nombre de usuario o la contraseña son incorrectos");
                 alert.showAndWait();
+                
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

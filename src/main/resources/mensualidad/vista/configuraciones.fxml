@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: C9CBCD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: C9CBCD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.ControladorConfiguraciones">
    <children>
       <Text layoutX="45.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONFIGURACIÓN">
          <font>
@@ -30,10 +30,10 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="286.0" layoutY="129.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextField layoutX="286.0" layoutY="183.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextField layoutX="286.0" layoutY="234.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button layoutX="324.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: #459AEF;" text="Guardar">
+      <TextField fx:id="antCont" layoutX="286.0" layoutY="129.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="nueCont" layoutX="286.0" layoutY="183.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="conCont" layoutX="286.0" layoutY="234.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button layoutX="324.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnGuardar" style="-fx-background-color: #459AEF;" text="Guardar">
          <font>
             <Font size="18.0" />
          </font>
