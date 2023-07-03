@@ -35,10 +35,11 @@
       </Text>
       <TableView fx:id="tablePagar" layoutX="-19.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8EC1F5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
-          <TableColumn fx:id="nombreColumna" prefWidth="128.0" text="Nombre" />
-          <TableColumn fx:id="deudaColumna" prefWidth="128.0" text="Deuda" />
-            <TableColumn fx:id="gradoColumna" prefWidth="122.0" text="Grado" />
-            <TableColumn fx:id="fechaVencimientoColumna" prefWidth="171.0" text="Fecha vencimiento" />
+          <TableColumn fx:id="idColumna" prefWidth="86.0" text="Id Estudiante" />
+          <TableColumn fx:id="pensionColumna" prefWidth="74.0" text="Pension" />
+            <TableColumn fx:id="mesesColumna" text="Cuotas" />
+            <TableColumn fx:id="totalColumna" prefWidth="134.0" text="Total Pagar" />
+            <TableColumn fx:id="pagadoColumna" prefWidth="175.0" text="Pagado" />
         </columns>
       </TableView>
    </children>

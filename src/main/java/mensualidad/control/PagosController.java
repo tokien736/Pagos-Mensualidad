@@ -32,11 +32,15 @@ public class PagosController implements Initializable {
     @FXML
     private TableView<Pago> tablePagar;
     @FXML
-    private TableColumn<Pago, String> nombreColumna;
+    private TableColumn<Pago, String> idColumna;
     @FXML
-    private TableColumn<Pago, Integer> deudaColumna;
+    private TableColumn<Pago, Integer> pensionColumna;
     @FXML
-    private TableColumn<Pago, LocalDate> fechaVencimientoColumna;
+    private TableColumn<Pago, Integer> mesesColumna;
+    @FXML
+    private TableColumn<Pago, Integer> totalColumna;
+    @FXML
+    private TableColumn<Pago, Integer> pagadoColumna;
 
     private Estudiantes_Controlador estudianteControlador;
     private MatriculaControladorJPA matriculaControlador;
@@ -67,7 +71,7 @@ public class PagosController implements Initializable {
         if (!nombre.isEmpty() && !grado.isEmpty()) {
             Estudiantes estudiante = estudianteControlador.buscarEstudiantePorNombreYGrado(nombre, grado);
             if (estudiante != null) {
-                cargarMatriculas(estudiante);
+                //asd
             } else {
                 mostrarAlerta("Estudiante no encontrado.", Alert.AlertType.ERROR);
             }
