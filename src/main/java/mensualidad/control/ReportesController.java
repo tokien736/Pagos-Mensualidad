@@ -9,9 +9,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import mensualidad.control.reporte.Reporte;
+import mensualidad.control.reporte.ReporteMatricula;
 
 /**
  * FXML Controller class
@@ -19,48 +18,21 @@ import javafx.scene.control.TextField;
  * @author PC-Jose
  */
 public class ReportesController implements Initializable {
-
-    @FXML
-    private TextField txtfieldEstudiante;
-    @FXML
-    private TextField txtfieldGrado;
-    @FXML
-    private TextField txtfieldGrado2;
-    @FXML
-    private TableView<?> tablaResultados;
-    @FXML
-    private TableColumn<?, ?> idColumna;
-    @FXML
-    private TableColumn<?, ?> nombreCompletoColumna;
-    @FXML
-    private TableColumn<?, ?> gradoColumna;
-    @FXML
-    private TableColumn<?, ?> fechaPagoColumna;
-    @FXML
-    private TableColumn<?, ?> totalPagoColumna;
-    @FXML
-    private TableView<?> tablaResultados2;
-    @FXML
-    private TableColumn<?, ?> idColumna2;
-    @FXML
-    private TableColumn<?, ?> nombreCompletoColumna2;
-    @FXML
-    private TableColumn<?, ?> gradoColumna2;
-
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
     @FXML
-    private void handleBuscar2ButtonAction(ActionEvent event) {
+    private void btnReporteEstudiante(ActionEvent event) {
+        Reporte reporte = new Reporte("Cherry");
+        reporte.generarReporte();
     }
-
     @FXML
-    private void handleBuscarButtonAction(ActionEvent event) {
+    private void btnReporteMatricula(ActionEvent event) {
+        ReporteMatricula reporte1 = new ReporteMatricula("Coffee");
+        reporte1.generarReporte();
     }
     
 }
