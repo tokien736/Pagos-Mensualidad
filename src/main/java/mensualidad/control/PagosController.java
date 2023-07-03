@@ -21,10 +21,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import mensualidad.control.JPA.Estudiantes_Controlador;
 import mensualidad.control.JPA.MatriculaControladorJPA;
-import mensualidad.control.JPA.PagoControladorJPA;
 import mensualidad.modelo.Estudiantes;
 import mensualidad.modelo.Matricula;
-import mensualidad.modelo.Pago;
 
 /**
  * FXML Controller class
@@ -79,40 +77,41 @@ public class PagosController implements Initializable {
             mostrarAlerta("No se encontró ningún estudiante con los datos proporcionados.", Alert.AlertType.INFORMATION);
         }
     }
-
-
+    
     @FXML
     private void btnPagar(ActionEvent event) {
         Matricula matriculaSeleccionada = tablePagar.getSelectionModel().getSelectedItem();
         if (matriculaSeleccionada != null) {
-            matriculaSeleccionada.setPagado(true);
-            EntityManagerFactory emf = matriculaControlador.getEntityManagerFactory();
-            EntityManager em = emf.createEntityManager();
-            EntityTransaction tx = null;
-            try {
-                tx = em.getTransaction();
-                tx.begin();
-                em.merge(matriculaSeleccionada);
-                tx.commit();
-                mostrarAlerta("Pago Realizado", Alert.AlertType.INFORMATION);
-                cargarMatriculas(estudianteActual); // Recargar la tabla
-            } catch (Exception e) {
-                if (tx != null && tx.isActive()) {
-                    tx.rollback();
+            if (matriculaSeleccionada.getPagado()) {
+                mostrarAlerta("El estudiante ya ha pagado su cuota.", Alert.AlertType.WARNING);
+            } else {
+                matriculaSeleccionada.setPagado(true);
+                EntityManagerFactory emf = matriculaControlador.getEntityManagerFactory();
+                EntityManager em = emf.createEntityManager();
+                EntityTransaction tx = null;
+                try {
+                    tx = em.getTransaction();
+                    tx.begin();
+                    em.merge(matriculaSeleccionada);
+                    tx.commit();
+                    mostrarAlerta("Pago Realizado", Alert.AlertType.INFORMATION);
+                    // Actualizar la lista de matrículas y refrescar la tabla
+                    cargarMatriculas(estudianteActual);
+                    tablePagar.refresh(); // Actualizar la visualización de la tabla
+                } catch (Exception e) {
+                    if (tx != null && tx.isActive()) {
+                        tx.rollback();
+                    }
+                    mostrarAlerta("Error al realizar el pago", Alert.AlertType.ERROR);
+                    e.printStackTrace();
+                } finally {
+                    em.close();
                 }
-                mostrarAlerta("Error al realizar el pago", Alert.AlertType.ERROR);
-                e.printStackTrace();
-            } finally {
-                em.close();
             }
         } else {
             mostrarAlerta("No se ha seleccionado ninguna matrícula.", Alert.AlertType.WARNING);
         }
     }
-
-
-
-
 
 
 

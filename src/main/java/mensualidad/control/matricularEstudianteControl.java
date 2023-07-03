@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mensualidad.control.JPA.Estudiantes_Controlador;
@@ -39,8 +40,24 @@ public class matricularEstudianteControl {
     }
     @FXML
     private void btMatricular(ActionEvent event) {
-        nuevoMatricula();
+        if (validadCampos()) {
+            nuevoMatricula();
+
+            // Mostrar mensaje de estudiante matriculado
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Estudiante Matriculado");
+            alert.setHeaderText(null);
+            alert.setContentText("El estudiante ha sido matriculado correctamente.");
+
+            alert.showAndWait();
+
+            // Borrar los campos
+            estudianteIdField.clear();
+            pensionField.clear();
+            cuotaField.clear();
+        }
     }
+
     private boolean validadCampos(){
         String errorMensaje = "";
         if (estudianteIdField.getText() == null || estudianteIdField.getText().length() == 0) {
