@@ -67,7 +67,7 @@ public class Estudiantes_Controlador {
         try {
             EntityManager em = emf.createEntityManager();
             TypedQuery<Estudiantes> consulta = em.createQuery(
-                "SELECT e FROM Estudiantes e WHERE e.nombreCompleto = :nombre AND e.gradoEstudios = :grado",
+                "SELECT e FROM Estudiantes e WHERE e.nombreCompleto = :nombre OR e.gradoEstudios = :grado",
                 Estudiantes.class
             );
             consulta.setParameter("nombre", nombre);
