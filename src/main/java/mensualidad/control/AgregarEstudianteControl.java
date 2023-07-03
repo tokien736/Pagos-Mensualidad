@@ -5,19 +5,16 @@
 package mensualidad.control;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mensualidad.control.JPA.Estudiantes_Controlador;
 import mensualidad.modelo.Estudiantes;
-import mensualidad.modelo.Matricula;
-
 /**
  * FXML Controller class
  *
@@ -25,7 +22,7 @@ import mensualidad.modelo.Matricula;
  */
 
 public class AgregarEstudianteControl implements Initializable {
-
+    private Stage dialogStage;
 
     @FXML
     private TextField nombreField;
@@ -36,23 +33,26 @@ public class AgregarEstudianteControl implements Initializable {
     
     private Estudiantes estudiantes;
     public void nuevoEstudainte(){
-        String nombre = nombreField.getText();
-        String apellido = apellidoField.getText();
-        String nombreCompleto = nombre + " " + apellido;
-        String grado = gradoField.getText();
+        String nombre = null;
+        String apellido = null;
+        String nombreCompleto; 
+        String grado = null;
+        if(validadCampos()){
+            nombre = nombreField.getText();
+            apellido = apellidoField.getText();            
+            grado = gradoField.getText();
+            nombreCompleto = nombre + " " + apellido;
+            grado = grado;
 
-        Estudiantes_Controlador controlador = new Estudiantes_Controlador();
-
-        
-        Estudiantes estudiante = new Estudiantes(nombreCompleto, grado);
-        estudiante.setGradoEstudios(grado);
-        controlador.insertarEstudiante(estudiante);
-        
-  
-        
-        
-
-        System.out.println("Estudiante insertado correctamente.");
+            Estudiantes_Controlador controlador = new Estudiantes_Controlador();
+            Estudiantes estudiante = new Estudiantes(nombreCompleto, grado);
+            estudiante.setGradoEstudios(grado);
+            controlador.insertarEstudiante(estudiante);                  
+            System.out.println("Estudiante insertado correctamente.");
+        } 
+        nombreField.setText("");
+        apellidoField.setText("");
+        gradoField.setText("");
         
     }
         
@@ -74,6 +74,33 @@ public class AgregarEstudianteControl implements Initializable {
     private void btAgregar(ActionEvent event) {
         nuevoEstudainte();
     }
+    private boolean validadCampos(){
+        String errorMensaje = "";
+        if (nombreField.getText() == null || nombreField.getText().length() == 0) {
+            errorMensaje += "Sin nombre válido!\n"; 
+        }
+        if (apellidoField.getText() == null || apellidoField.getText().length() == 0) {
+            errorMensaje += "Sin apellido válido!\n"; 
+        }
+        if (gradoField.getText() == null || gradoField.getText().length() == 0) {
+            errorMensaje += "Sin grado válido!\n"; 
+        }  
+        
+        if (errorMensaje.length() == 0) {
+            return true;
+        } else {
+            // muestra el error del mensaje
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Campos inválidos");
+            alert.setHeaderText("Corrija los campos inválidos");
+            alert.setContentText(errorMensaje);
+
+            alert.showAndWait();
+
+            return false;
+        }
+    }    
 
     
 }

@@ -14,6 +14,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mensualidad.control.JPA.Estudiantes_Controlador;
@@ -22,7 +23,7 @@ import mensualidad.modelo.Estudiantes;
 import mensualidad.modelo.Matricula;
 
 public class matricularEstudianteControl {
-
+    private Stage dialogStage;
     //private MatriculaControladorJPA control;
     @FXML
     private TextField estudianteIdField;
@@ -31,36 +32,6 @@ public class matricularEstudianteControl {
     @FXML
     private TextField cuotaField;
 
-    public void nuevoMatricula() {
-        int estudianteId = Integer.parseInt(estudianteIdField.getText());
-        int pension = Integer.parseInt(pensionField.getText());
-        int cuotasMeses = Integer.parseInt(cuotaField.getText());
-        
-        // Crear una fábrica de EntityManager
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("BaseDatos");
-
-        // Obtener una instancia de EntityManager
-        EntityManager entityManager = emFactory.createEntityManager();
-
-        // Buscar la entidad Estudiantes por su identificador        
-        Estudiantes estudiante = entityManager.find(Estudiantes.class, estudianteId);
-        // Cerrar el EntityManager y la fábrica de EntityManager al finalizar
-        entityManager.close();
-        emFactory.close();
-
-        
-
-        MatriculaControladorJPA controlador = new MatriculaControladorJPA();
-
-        Boolean pagado = false;
-        LocalDate fechaPago = LocalDate.of(2022, 1, 22);
-
-        Matricula matricula = new Matricula(fechaPago, pension, cuotasMeses, pagado, estudiante);
-        controlador.insertarMatricula(matricula);
-
-        System.out.println("Matricula insertada correctamente.");
-
-    }
     @FXML
     private void atras(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -70,5 +41,65 @@ public class matricularEstudianteControl {
     private void btMatricular(ActionEvent event) {
         nuevoMatricula();
     }
+    private boolean validadCampos(){
+        String errorMensaje = "";
+        if (estudianteIdField.getText() == null || estudianteIdField.getText().length() == 0) {
+            errorMensaje += "Sin IdValido!\n"; 
+        }
+        if (pensionField.getText() == null || pensionField.getText().length() == 0) {
+            errorMensaje += "Sin pension válido!\n"; 
+        }
+        if (cuotaField.getText() == null || cuotaField.getText().length() == 0) {
+            errorMensaje += "Sin couta válido!\n"; 
+        }  
+        
+        if (errorMensaje.length() == 0) {
+            return true;
+        } else {
+            // muestra el error del mensaje
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Campos inválidos");
+            alert.setHeaderText("Corrija los campos inválidos");
+            alert.setContentText(errorMensaje);
+
+            alert.showAndWait();
+
+            return false;
+        }
+    }    
+
+    public void nuevoMatricula() {
+        if(validadCampos()){
+            int estudianteId = Integer.parseInt(estudianteIdField.getText());
+            int pension = Integer.parseInt(pensionField.getText());
+            int cuotasMeses = Integer.parseInt(cuotaField.getText());
+
+            // Crear una fábrica de EntityManager
+            EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("BaseDatos");
+
+            // Obtener una instancia de EntityManager
+            EntityManager entityManager = emFactory.createEntityManager();
+
+            // Buscar la entidad Estudiantes por su identificador        
+            Estudiantes estudiante = entityManager.find(Estudiantes.class, estudianteId);
+            // Cerrar el EntityManager y la fábrica de EntityManager al finalizar
+            entityManager.close();
+            emFactory.close();
+
+
+
+            MatriculaControladorJPA controlador = new MatriculaControladorJPA();
+
+            Boolean pagado = false;
+            LocalDate fechaPago = LocalDate.of(2022, 1, 22);
+
+            Matricula matricula = new Matricula(fechaPago, pension, cuotasMeses, pagado, estudiante);
+            controlador.insertarMatricula(matricula);
+
+            System.out.println("Matricula insertada correctamente.");
+            
+        }
+    }    
 
 }

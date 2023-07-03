@@ -66,7 +66,8 @@
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
-        </dependency>        
+        </dependency> 
+<!--JavaFX-->               
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -77,6 +78,7 @@
             <artifactId>javafx-fxml</artifactId>
             <version>20</version>
         </dependency>
+<!--Jaspert-->        
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-xalan</artifactId>

@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,6 +25,7 @@ import mensualidad.modelo.Usuarios;
  * @author USUARIO
  */
 public class ControladorConfiguraciones implements Initializable {
+    private Stage dialogStage;
 
     @FXML
     private TextField antCont;
@@ -42,62 +44,91 @@ public class ControladorConfiguraciones implements Initializable {
 
     @FXML
     private void btnGuardar(ActionEvent event) {
-        String antiguaContrasena = antCont.getText();
-        String nuevaContrasena = nueCont.getText();
-        String confirmarContrasena = conCont.getText();
+        if(validadCampos()){
+            String antiguaContrasena = antCont.getText();
+            String nuevaContrasena = nueCont.getText();
+            String confirmarContrasena = conCont.getText();
 
-        Usuarios usuarioAutenticado = UsuarioAutenticado.getInstance().getUsuario();
-        
-        if (usuarioAutenticado != null) {
-            // Verificar que la contraseña antigua coincida con la almacenada
-            if (usuarioAutenticado.getContrasena().equals(antiguaContrasena)) {
-                // Verificar que la nueva contraseña y la confirmación coincidan
-                if (nuevaContrasena.equals(confirmarContrasena)) {
-                    // Actualizar la contraseña del usuario
-                    usuarioAutenticado.setContrasena(nuevaContrasena);
-                    
-                    // Guardar los cambios en la base de datos (puedes adaptarlo según tu implementación)
-                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("BaseDatos");
-                    EntityManager em = emf.createEntityManager();
-                    try {
-                        em.getTransaction().begin();
-                        em.merge(usuarioAutenticado);
-                        em.getTransaction().commit();
-                    } catch (Exception e) {
-                        em.getTransaction().rollback();
-                        e.printStackTrace();
-                    } finally {
-                        em.close();
-                        emf.close();
+            Usuarios usuarioAutenticado = UsuarioAutenticado.getInstance().getUsuario();
+
+            if (usuarioAutenticado != null) {
+                // Verificar que la contraseña antigua coincida con la almacenada
+                if (usuarioAutenticado.getContrasena().equals(antiguaContrasena)) {
+                    // Verificar que la nueva contraseña y la confirmación coincidan
+                    if (nuevaContrasena.equals(confirmarContrasena)) {
+                        // Actualizar la contraseña del usuario
+                        usuarioAutenticado.setContrasena(nuevaContrasena);
+
+                        // Guardar los cambios en la base de datos (puedes adaptarlo según tu implementación)
+                        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BaseDatos");
+                        EntityManager em = emf.createEntityManager();
+                        try {
+                            em.getTransaction().begin();
+                            em.merge(usuarioAutenticado);
+                            em.getTransaction().commit();
+                        } catch (Exception e) {
+                            em.getTransaction().rollback();
+                            e.printStackTrace();
+                        } finally {
+                            em.close();
+                            emf.close();
+                        }
+
+                        // Mostrar un mensaje de éxito o realizar otras acciones
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Cambio de Contraseña");
+                        alert.setHeaderText(null);
+                        alert.setContentText("¡La contraseña se ha cambiado exitosamente!");
+                        alert.showAndWait();
+
+                        // Limpiar los campos de texto
+                        antCont.clear();
+                        nueCont.clear();
+                        conCont.clear();
+                    } else {
+                        // Mostrar un mensaje de error si la nueva contraseña y la confirmación no coinciden
+                        Alert alert = new Alert(AlertType.ERROR);
+                        alert.setTitle("Error de Contraseña");
+                        alert.setHeaderText(null);
+                        alert.setContentText("La nueva contraseña y la confirmación no coinciden");
+                        alert.showAndWait();
                     }
-                    
-                    // Mostrar un mensaje de éxito o realizar otras acciones
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Cambio de Contraseña");
-                    alert.setHeaderText(null);
-                    alert.setContentText("¡La contraseña se ha cambiado exitosamente!");
-                    alert.showAndWait();
-                    
-                    // Limpiar los campos de texto
-                    antCont.clear();
-                    nueCont.clear();
-                    conCont.clear();
                 } else {
-                    // Mostrar un mensaje de error si la nueva contraseña y la confirmación no coinciden
+                    // Mostrar un mensaje de error si la contraseña antigua no coincide
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error de Contraseña");
                     alert.setHeaderText(null);
-                    alert.setContentText("La nueva contraseña y la confirmación no coinciden");
+                    alert.setContentText("La contraseña antigua es incorrecta");
                     alert.showAndWait();
                 }
-            } else {
-                // Mostrar un mensaje de error si la contraseña antigua no coincide
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error de Contraseña");
-                alert.setHeaderText(null);
-                alert.setContentText("La contraseña antigua es incorrecta");
-                alert.showAndWait();
-            }
+            }                        
         }
+
     }
+    private boolean validadCampos(){
+        String errorMensaje = "";
+        if (antCont.getText() == null || antCont.getText().length() == 0) {
+            errorMensaje += "Sin antigua contraseña no válido!\n"; 
+        }
+        if (nueCont.getText() == null || nueCont.getText().length() == 0) {
+            errorMensaje += "Sin nueva contraseña no válido!\n"; 
+        }  
+        if (conCont.getText() == null || conCont.getText().length() == 0) {
+            errorMensaje += "Sin confirmación de contraseña no válido!\n"; 
+        }  
+        if (errorMensaje.length() == 0) {
+            return true;
+        } else {
+            // muestra el error del mensaje
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Campos inválidos");
+            alert.setHeaderText("Corrija los campos inválidos");
+            alert.setContentText(errorMensaje);
+
+            alert.showAndWait();
+
+            return false;
+        }
+    }     
 }

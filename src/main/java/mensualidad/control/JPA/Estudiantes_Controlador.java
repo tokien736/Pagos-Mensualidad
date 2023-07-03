@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import mensualidad.modelo.Estudiantes;
@@ -62,4 +63,19 @@ public class Estudiantes_Controlador {
             em.close();
         }
     } 
+    public Estudiantes buscarEstudiantePorNombreYGrado(String nombre, String grado) {
+        try {
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<Estudiantes> consulta = em.createQuery(
+                "SELECT e FROM Estudiantes e WHERE e.nombreCompleto = :nombre AND e.gradoEstudios = :grado",
+                Estudiantes.class
+            );
+            consulta.setParameter("nombre", nombre);
+            consulta.setParameter("grado", grado);
+            return consulta.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
+
 }

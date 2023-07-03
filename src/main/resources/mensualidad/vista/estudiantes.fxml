@@ -7,35 +7,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: C9CBCD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.EstudiantesControlador">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: C9CBCD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mensualidad.control.EstudiantesControlador">
    <children>
       <Line endX="380.0" layoutX="166.0" layoutY="61.0" startX="-151.0" />
-      <TableView fx:id="tablaMatricula" layoutX="236.0" layoutY="131.0" prefHeight="269.0" prefWidth="315.0" style="-fx-background-color: #B5D0F3;">
-         <columns>
-            <TableColumn fx:id="idMatricula" prefWidth="33.0" text="ID " />
-            <TableColumn fx:id="pagadoColumna" prefWidth="71.0" text="Pagado" />
-            <TableColumn fx:id="cuotaColumna" prefWidth="78.0" text="cuota" />
-            <TableColumn fx:id="mesesColumna" prefWidth="66.0" text="meses" />
-            <TableColumn fx:id="fechaColumna" prefWidth="66.0" text="fecha" />
-         </columns>
-      </TableView>
-      <TableView fx:id="tablaEstudiante" layoutX="14.0" layoutY="131.0" prefHeight="269.0" prefWidth="220.0" style="-fx-background-color: #B5D0F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="131.0">
+      <TableView fx:id="tablaEstudiante" layoutX="8.0" layoutY="131.0" prefHeight="269.0" prefWidth="224.0" style="-fx-background-color: #B5D0F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="368.0" AnchorPane.topAnchor="131.0">
          <columns>
             <TableColumn fx:id="idColumna" prefWidth="33.0" text="ID " />
             <TableColumn fx:id="nombreCompletoColumna" prefWidth="103.0" text="Estudiante" />
             <TableColumn fx:id="gradoColumna" prefWidth="83.0" text="Grado" />
          </columns>
       </TableView>
-      <Button layoutX="15.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnReporte" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: F13030;" text="Reporte Estudiantes" />
-      <Button layoutX="419.0" layoutY="84.0" mnemonicParsing="false" onAction="#agregarestudiante" style="-fx-background-color: #227AE9;" text="Agregar Estudiante" />
+      <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#btnReporte" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: F13030;" text="Reporte Estudiantes" />
+      <Button layoutX="418.0" layoutY="68.0" mnemonicParsing="false" onAction="#agregarestudiante" style="-fx-background-color: #227AE9;" text="Agregar Estudiante" />
       <Label layoutX="14.0" layoutY="23.0" text="Gestionar información de los estudiantes">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="323.0" layoutY="84.0" mnemonicParsing="false" onAction="#agregarMatricula" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #32C215;" text="Matricular" />
-      <TableView fx:id="tablaMatricula" layoutX="218.0" layoutY="131.0" prefHeight="269.0" prefWidth="344.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0">
+      <Button layoutX="322.0" layoutY="68.0" mnemonicParsing="false" onAction="#agregarMatricula" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #32C215;" text="Matricular" />
+      <TableView fx:id="tablaMatricula" layoutX="248.0" layoutY="131.0" prefHeight="269.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="248.0" AnchorPane.rightAnchor="0.0">
         <columns>
           <TableColumn fx:id="idColumna2" prefWidth="30.0" text="ID" />
           <TableColumn fx:id="idEstudianteColumna" prefWidth="72.0" text="IDEstudiante" />
@@ -45,6 +37,16 @@
             <TableColumn fx:id="estadoColumna" prefWidth="58.0" text="Estado" />
         </columns>
       </TableView>
-      <Button layoutX="156.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnReporte2" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: F13030;" text="Reporte Matricula" />
+      <Button layoutX="155.0" layoutY="68.0" mnemonicParsing="false" onAction="#btnReporte2" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: F13030;" text="Reporte Matricula" />
+      <Text layoutX="37.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudiante">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="311.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricula">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

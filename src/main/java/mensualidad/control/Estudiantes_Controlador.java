@@ -16,10 +16,10 @@ public class Estudiantes_Controlador {
     public ObservableList<Estudiantes> getDatoEstudiantes() {
         return datoEstudiante;
     }
-    private EntityManagerFactory emf;
-    public Estudiantes_Controlador() {
-        this.emf = Persistence.createEntityManagerFactory("BaseDatos");
-    }
+private EntityManagerFactory emf;
+public Estudiantes_Controlador() {
+    this.emf = Persistence.createEntityManagerFactory("BaseDatos");
+}
     public ObservableList<Estudiantes> cargarEstudiantes() {
         ObservableList<Estudiantes> datoEstudiante = FXCollections.observableArrayList();
         EntityManager em = emf.createEntityManager();
