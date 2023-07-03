@@ -3,6 +3,10 @@ package mensualidad.control;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +15,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import mensualidad.control.JPA.Estudiantes_Controlador;
 import mensualidad.control.JPA.MatriculaControladorJPA;
 import mensualidad.control.JPA.PagoControladorJPA;
@@ -30,79 +38,101 @@ public class PagosController implements Initializable {
     @FXML
     private TextField gradoField;
     @FXML
-    private TableView<Pago> tablePagar;
+    private TableView<Matricula> tablePagar;
     @FXML
-    private TableColumn<Pago, String> idColumna;
+    private TableColumn<Matricula, String> idColumna;
     @FXML
-    private TableColumn<Pago, Integer> pensionColumna;
+    private TableColumn<Matricula, Integer> pensionColumna;
     @FXML
-    private TableColumn<Pago, Integer> mesesColumna;
+    private TableColumn<Matricula, Integer> mesesColumna;
     @FXML
-    private TableColumn<Pago, Integer> totalColumna;
+    private TableColumn<Matricula, Integer> totalColumna;
     @FXML
-    private TableColumn<Pago, Integer> pagadoColumna;
+    private TableColumn<Matricula, Boolean> pagadoColumna;
 
     private Estudiantes_Controlador estudianteControlador;
     private MatriculaControladorJPA matriculaControlador;
-    private PagoControladorJPA pagoControlador;
+    private Estudiantes estudianteActual; // Variable para almacenar el estudiante actual seleccionado 
 
     /**
      * Initializes the controller class.
      */
-    @FXML    
+    @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         estudianteControlador = new Estudiantes_Controlador();
         matriculaControlador = new MatriculaControladorJPA();
-        pagoControlador = new PagoControladorJPA();
 
-        nombreColumna.setCellValueFactory(new PropertyValueFactory<>("estudianteNombreCompleto"));
-        deudaColumna.setCellValueFactory(new PropertyValueFactory<>("deuda"));
-        fechaVencimientoColumna.setCellValueFactory(new PropertyValueFactory<>("fechaVencimiento"));
-
-        cargarEstudiantes();
+        
     }
+
 
     @FXML
     private void btnBuscar(ActionEvent event) {
         String nombre = nombreField.getText();
         String grado = gradoField.getText();
 
-        if (!nombre.isEmpty() && !grado.isEmpty()) {
-            Estudiantes estudiante = estudianteControlador.buscarEstudiantePorNombreYGrado(nombre, grado);
-            if (estudiante != null) {
-                //asd
-            } else {
-                mostrarAlerta("Estudiante no encontrado.", Alert.AlertType.ERROR);
-            }
+        estudianteActual = estudianteControlador.buscarEstudiantePorNombreYGrado(nombre, grado);
+        if (estudianteActual != null) {
+            cargarMatriculas(estudianteActual);
         } else {
-            mostrarAlerta("Ingresa el nombre y el grado del estudiante.", Alert.AlertType.WARNING);
+            mostrarAlerta("No se encontró ningún estudiante con los datos proporcionados.", Alert.AlertType.INFORMATION);
         }
     }
+
 
     @FXML
     private void btnPagar(ActionEvent event) {
-        Pago pagoSeleccionado = tablePagar.getSelectionModel().getSelectedItem();
-        if (pagoSeleccionado != null) {
-            // Aquí puedes implementar la lógica para realizar el pago
-            // Por ejemplo, actualizar la deuda del pago a cero y guardar los cambios en la base de datos
-            // También puedes mostrar un mensaje de éxito si se realizó el pago correctamente
-            // O mostrar un mensaje de error si no se pudo realizar el pago
+        Matricula matriculaSeleccionada = tablePagar.getSelectionModel().getSelectedItem();
+        if (matriculaSeleccionada != null) {
+            matriculaSeleccionada.setPagado(true);
+            EntityManagerFactory emf = matriculaControlador.getEntityManagerFactory();
+            EntityManager em = emf.createEntityManager();
+            EntityTransaction tx = null;
+            try {
+                tx = em.getTransaction();
+                tx.begin();
+                em.merge(matriculaSeleccionada);
+                tx.commit();
+                mostrarAlerta("Pago Realizado", Alert.AlertType.INFORMATION);
+                cargarMatriculas(estudianteActual); // Recargar la tabla
+            } catch (Exception e) {
+                if (tx != null && tx.isActive()) {
+                    tx.rollback();
+                }
+                mostrarAlerta("Error al realizar el pago", Alert.AlertType.ERROR);
+                e.printStackTrace();
+            } finally {
+                em.close();
+            }
         } else {
-            mostrarAlerta("Selecciona un pago de la tabla.", Alert.AlertType.WARNING);
+            mostrarAlerta("No se ha seleccionado ninguna matrícula.", Alert.AlertType.WARNING);
         }
     }
 
-    private void cargarEstudiantes() {
-        tablePagar.getItems().clear();
-        tablePagar.setItems(pagoControlador.cargarPagos());
-    }
+
+
+
+
+
 
     private void cargarMatriculas(Estudiantes estudiante) {
-        tablePagar.getItems().clear();
-        tablePagar.setItems(pagoControlador.cargarPagosPorEstudiante(estudiante));
+        ObservableList<Matricula> matriculas = matriculaControlador.cargarMatriculas();
+        tablePagar.setItems(matriculas);
+
+        idColumna.setCellValueFactory(new PropertyValueFactory<>("id"));
+        pensionColumna.setCellValueFactory(new PropertyValueFactory<>("pension"));
+        mesesColumna.setCellValueFactory(new PropertyValueFactory<>("mesesDeuda"));
+        pagadoColumna.setCellValueFactory(new PropertyValueFactory<>("pagado"));
+        totalColumna.setCellValueFactory(cellData -> {
+            int pension = cellData.getValue().getPension();
+            int mesesDeuda = cellData.getValue().getMesesDeuda();
+            int total = pension * mesesDeuda;
+            return new SimpleIntegerProperty(total).asObject();
+        });
     }
 
+    
     private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
         alert.setTitle("Mensaje");

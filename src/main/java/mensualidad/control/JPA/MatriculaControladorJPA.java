@@ -68,5 +68,8 @@ public class MatriculaControladorJPA {
             em.close();
         }
     }
+    public EntityManagerFactory getEntityManagerFactory() {
+        return emf;
+    }
 
 }

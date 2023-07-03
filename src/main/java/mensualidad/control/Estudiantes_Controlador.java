@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import mensualidad.modelo.Estudiantes;
 
@@ -55,4 +56,20 @@ public Estudiantes_Controlador() {
             em.close();
         }
     }
+    public Estudiantes buscarEstudiante(String nombre, String grado) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM Estudiantes e WHERE e.nombreCompleto = :nombre AND e.gradoEstudios = :grado");
+            consulta.setParameter("nombre", nombre);
+            consulta.setParameter("grado", grado);
+            List<Estudiantes> resultados = consulta.getResultList();
+            if (!resultados.isEmpty()) {
+                return resultados.get(0);
+            }
+        } finally {
+            em.close();
+        }
+        return null; // Si no se encuentra ningún estudiante con los datos proporcionados
+    }
+    
 }
